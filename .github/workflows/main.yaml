@@ -39,16 +39,19 @@ jobs:
         with:
           name: kli
           path: kli
+
   create_tag:
     needs: check_tag
     runs-on: ubuntu-latest
-    if: needs.check_tag.outputs.tag_exists == 'false'
+    if: needs.check_tag.outputs.tag_exists == 'false' && github.ref == 'refs/heads/main'
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ssh-key: ${{ secrets.REKODI_SSH_KEY }}
       - name: Set up Git user
         run: |
           git config --global user.name "github-actions[bot]"
