@@ -40,7 +40,7 @@ jobs:
           BITBUCKET_USER_EMAIL: ${{ secrets.BITBUCKET_USER_EMAIL }}
           BITBUCKET_WORKSPACE_CLARO: ${{ secrets.BITBUCKET_WORKSPACE_CLARO }}
           BITBUCKET_REPO_NAME_CLARO: ${{ secrets.BITBUCKET_REPO_NAME_CLARO }}
-          MODULE_NAME: ${{ secrets.MODULE_NAME }}
-          MIRROR_SUBDIR: karibu/${{ secrets.MODULE_NAME }}
+          MODULE_NAME: ${{ env.MODULE_NAME }}
+          MIRROR_SUBDIR: karibu/${{ env.MODULE_NAME }}
           SOURCE_REPO_DIR: ..
         run: bash ../scripts/push_to_mirror.sh

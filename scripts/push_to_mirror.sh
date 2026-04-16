@@ -46,7 +46,7 @@ rsync -av --delete \
   --exclude='terraform.tfvars' \
   "$source_repo_dir"/ "$mirror_subdir"/
 
-git add --all
+git add --all "$mirror_subdir"
 
 curl -sL https://github.com/KaribuLab/kli/releases/download/v0.2.2/kli  --output /tmp/kli && chmod +x /tmp/kli
 created_commit=false
