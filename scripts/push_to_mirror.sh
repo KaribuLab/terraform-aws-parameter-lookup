@@ -7,8 +7,8 @@ set -euo pipefail
 source_branch="feature/karibu-mirror"
 target_branch="master"
 module_name="${MODULE_NAME}"
-source_repo_dir="${SOURCE_REPO_DIR:-..}"
-mirror_subdir="${MIRROR_SUBDIR:-karibu/$module_name}"
+source_repo_dir="${SOURCE_REPO_DIR}"
+mirror_subdir="${MODULE_NAME}/${MIRROR_SUBDIR}"
 
 commit_message=$( git -C "$source_repo_dir" log -1 --pretty=%s 2>/dev/null || git log -1 --pretty=%s )
 
@@ -30,6 +30,7 @@ fi
 
 # Sincronizar contenido del repo de GitHub al subdirectorio espejo
 mkdir -p "$mirror_subdir"
+echo "Sincronizando contenido del repo de GitHub desde $source_repo_dir al subdirectorio espejo $mirror_subdir"
 rsync -av --delete \
   --exclude='.git' \
   --exclude='bitbucket-repo' \
